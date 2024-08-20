@@ -4,9 +4,9 @@ const todoForm = document.getElementById("todo_form");
 const todoInput = document.getElementById("todo_list_input");
 const todoWrap = document.getElementById("todo_list_wrap");
 const noTodoDiv = document.getElementById("no_todo_list");
-const modal = document.getElementById('edit_modal');
-const editForm = document.getElementById('edit_form');
-let editInput = document.getElementById('todo_list_input');
+const modal = document.getElementById("edit_modal");
+const editForm = document.getElementById("edit_form");
+let editInput = document.getElementById("todo_list_input");
 
 // 투두 폼 섭밋
 todoForm.addEventListener("submit", (e) => {
@@ -49,10 +49,14 @@ const lengthCheck = () => {
 // 투두 완료갯수 확인
 const comLengthCheck = () => {
   let storageData = JSON.parse(localStorage.getItem("todos"));
-  const $length = document.querySelector('.todo_list_done_wr > .todo_list_length_txt');
-  const $doneLength = document.querySelector('.todo_list_done_wr > .todo_list_done_length');
-  
-  const doneTodos = storageData.filter(data => data.done === true).length;
+  const $length = document.querySelector(
+    ".todo_list_done_wr > .todo_list_length_txt"
+  );
+  const $doneLength = document.querySelector(
+    ".todo_list_done_wr > .todo_list_done_length"
+  );
+
+  const doneTodos = storageData.filter((data) => data.done === true).length;
 
   if (!storageData || storageData.length === 0) {
     $length.innerHTML = 0;
@@ -61,7 +65,7 @@ const comLengthCheck = () => {
     $length.innerHTML = storageData.length;
     $doneLength.innerHTML = doneTodos;
   }
-}
+};
 
 // 스토리지 체크후 렌더링
 const checkStorage = () => {
@@ -143,8 +147,8 @@ const delTodo = (e) => {
     comLengthCheck();
 
     !storageData || storageData.length === 0
-    ? noTodoDiv.classList.add("on")
-    : todoWrap.classList.add("on");
+      ? noTodoDiv.classList.add("on")
+      : todoWrap.classList.add("on");
   } else {
     return;
   }
@@ -169,31 +173,35 @@ const completeTodo = (e) => {
 
 // 모달 열고 수정인풋에 data-id 전달
 const openModal = (e) => {
-  modal.classList.add('on');
-  editInput.setAttribute('data-id', e.currentTarget.getAttribute('data-id'))
-}
+  modal.classList.add("on");
+  editInput.setAttribute("data-id", e.currentTarget.getAttribute("data-id"));
+};
 
 // 모달 닫고 수정인풋에 data-id 삭제
 const closeModal = () => {
-  modal.classList.remove('on');
-  editInput.removeAttribute('data-id')
-}
+  modal.classList.remove("on");
+  editInput.removeAttribute("data-id");
+};
 
 // edit submit하기
-editForm.addEventListener('submit', (e) => {
+editForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  let $editInput = document.getElementById('todo_list_input_edit')
-  let storageData = JSON.parse(localStorage.getItem('todos'));
-  const todoId = Number(editInput.getAttribute('data-id'));
-  const matchedTodo = storageData.findIndex(element => element.id === todoId);
-  storageData[matchedTodo].txt = $editInput.value;
-  $editInput.value = '';
+  let $editInput = document.getElementById("todo_list_input_edit");
+  let storageData = JSON.parse(localStorage.getItem("todos"));
+  const todoId = Number(editInput.getAttribute("data-id"));
+  const matchedTodo = storageData.findIndex((element) => element.id === todoId);
+  if ($editInput.value.length > 2) {
+    storageData[matchedTodo].txt = $editInput.value;
+    $editInput.value = "";
 
-  todoWrap.innerHTML = '';
-  storageData.map(a => renderTodos(a.txt, a.id, a.done));
-  localStorage.setItem('todos', JSON.stringify(storageData));
-  closeModal()
-})
+    todoWrap.innerHTML = "";
+    storageData.map((a) => renderTodos(a.txt, a.id, a.done));
+    localStorage.setItem("todos", JSON.stringify(storageData));
+    closeModal();
+  } else {
+    alert('최소 2글자 이상 입력해주세요.')
+  }
+});
 
 checkStorage();
 // });
