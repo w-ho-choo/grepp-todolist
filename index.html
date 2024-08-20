@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나의 할 일 목록</title>
+  <script src="./js/main.js" defer></script>
+  <script src="https://kit.fontawesome.com/6b844b0217.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <main id="app">
+    <div id="todo_top">
+      <div id="todo_header">
+        <h2><img src="./img/rocket.png" alt="rocket">
+          <p><span style="color: var(--color-blue);">to</span><span style="color: var(--color-purple-dark);">do</span>
+          </p>
+        </h2>
+      </div>
+      <form id="todo_form">
+        <input type="text" id="todo_list_input" placeholder="새로운 할 일 추가하기">
+        <button id="todo_list_submit" class="submit_btn">
+          <span>입력</span>
+          <span><img src="./img/plus.png" alt=""></span>
+        </button>
+      </form>
+    </div>
+    <div id="todo_btm">
+      <div id="todo_list_status">
+        <div class="todo_list_length">
+          <span class="todo_list_length_subject">나의 할 일 목록</span>
+          <span class="todo_list_length_txt"></span>
+        </div>
+        <div class="todo_list_done_length">
+          <span class="todo_list_length_subject">나의 할 일 목록</span>
+          <span class="todo_list_done_wr">
+            <i class="todo_list_done_length">2</i>
+            중
+            <i class="todo_list_length_txt">5</i>
+          </span>
+        </div>
+      </div>
+      <ul id="todo_list_wrap">
+
+      </ul>
+      <div id="no_todo_list">
+        <img src="./img/empty_img.png" alt="empty_img">
+        <h2>
+          <span>아직 등록된 할 일이 없습니다</span>
+          <br>작업을 생성하고 할 일 목록을 정리하세요
+        </h2>
+      </div>
+    </div>
+    <div id="edit_modal">
+      <form id="edit_form">
+        <div id="edit_close_btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></div>
+        <h2>수정하기</h2>
+        <div class="edit_form_inner">
+          <input type="text" id="todo_list_input_edit" placeholder="나의 할 일 수정하기">
+          <button id="todo_list_edit" class="submit_btn">
+            <span>입력</span>
+            <span><img src="./img/plus.png" alt=""></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
