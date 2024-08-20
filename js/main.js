@@ -141,6 +141,10 @@ const delTodo = (e) => {
     localStorage.setItem("todos", JSON.stringify(storageData));
     lengthCheck();
     comLengthCheck();
+
+    !storageData || storageData.length === 0
+    ? noTodoDiv.classList.add("on")
+    : todoWrap.classList.add("on");
   } else {
     return;
   }
